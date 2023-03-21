@@ -4,6 +4,8 @@
 
 Python + ffmpeg empowered fast video trimmer. With GPU acceleration support.
 
+
+Recorded with [Peek](https://github.com/phw/peek)
 https://user-images.githubusercontent.com/23504691/226756098-da6454a8-13b1-44e7-b172-81c7d8804342.mp4
 
 # Dependencies
