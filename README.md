@@ -3,6 +3,10 @@
 
 Python + ffmpeg empowered fast video trimmer. With GPU acceleration support.
 
+
+https://user-images.githubusercontent.com/23504691/226742459-9a2ef96c-7917-4580-b4fc-63c978fde09e.mp4
+
+
 # Dependencies
 
 1. [Sun-Valley-ttk-theme](https://github.com/rdbende/Sun-Valley-ttk-theme)
