@@ -52,7 +52,7 @@ def cut_video():
         player.loop_playlist = 'inf'
         global cut_output_file_path
         cut_output_file_path = output_file
-        print(cmd)
+        #print(cmd)
 
 
 
@@ -74,7 +74,10 @@ def on_slider_move(event):
 root = tk.Tk()
 root.title("PyTrimmer")
 root.geometry("500x500")
-icon = tk.PhotoImage(file='./envycontro_pyqtl.png')
+
+script_dir = os.path.dirname(os.path.realpath(__file__))
+icon_path = os.path.join(script_dir, 'PyTrimmer.png')
+icon = tk.PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
 
 
@@ -167,7 +170,7 @@ def resize_canvas(event):
 
     global end_width
     end_width = root.winfo_width()
-    print(" Resize Window width:", end_width)
+    #print(" Resize Window width:", end_width)
 
     if(root.winfo_width() == 1):
         canvas_width = 460
@@ -180,7 +183,7 @@ def resize_canvas(event):
     slider2_width = int(end_width*0.90)
     canvas.coords(slider1, slider1_width, 0, slider1_width + 10, canvas_height)
     canvas.coords(slider2, slider2_width - 10, 0, slider2_width, canvas_height)
-    print(" Slider2 width", slider2_width)
+    #print(" Slider2 width", slider2_width)
 
 # Add the custom dual-slider
 video_duration = 100  # Replace with actual video duration
@@ -196,13 +199,13 @@ global end_width
 
 if(root.winfo_width() != 1):
     canvas_width = end_width
-    print(canvas_width)
+    #print(canvas_width)
 else:
     canvas_width = 710
 
 slider1_width = int(root.winfo_width() * 0.01)
 slider2_width = int(canvas_width)
-print(slider2_width)
+#print(slider2_width)
 slider1 = canvas.create_rectangle(slider1_width, 0, slider1_width + 10, canvas_height, fill='blue')
 slider2 = canvas.create_rectangle(slider2_width - 10, 0, slider2_width, canvas_height, fill='blue')
 
