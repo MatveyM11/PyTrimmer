@@ -1,5 +1,6 @@
 # PyTrimmer
-![PyTrimmer](https://user-images.githubusercontent.com/23504691/226711034-49107801-39dc-4e2f-9368-3aad20fc2151.png)
+![PyTrimmer](https://user-images.githubusercontent.com/23504691/226744570-9dff3966-7bc0-4c80-b88f-a0baffb61ca3.png)
+
 
 Python + ffmpeg empowered fast video trimmer. With GPU acceleration support.
 
