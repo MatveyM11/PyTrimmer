@@ -1,0 +1,22 @@
+[Desktop Entry]
+GenericName=PyTrimmer
+GenericName[ru]=PyTrimmer
+GenericName[es_ES]=PyTrimmer
+GenericName[en]=PyTrimmer
+
+Comment[ru]=Быстрая обрезка видео с помощью FFmpeg и ГП-ускорение
+Comment=Fast video trimming using FFmpeg and GPU-acceleration
+Comment[es]=Recorte de vídeo rápido Con ffmpeg y aceleración GP
+Comment[en]=Fast video trimming using FFmpeg and GPU-acceleration
+
+Exec=python3
+Icon=
+MimeType=
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Categories=Graphics;Multimedia;
+X-KDE-SubstituteUID=false
+X-KDE-Username=
