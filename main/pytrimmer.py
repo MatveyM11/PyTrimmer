@@ -9,6 +9,7 @@ def get_video_duration(video_path):
     return duration
 
 def browse_video_file():
+    global video_duration
     video_file_path = filedialog.askopenfilename(filetypes=[("MP4 files", "*.mp4"),
                                                               ("MKV files", "*.mkv"),
                                                               ("AVI files", "*.avi"),
@@ -22,6 +23,10 @@ def browse_video_file():
         player.loop_playlist = 'inf'
         global original_video_path
         original_video_path = video_file_path
+
+        # Get the video duration
+        video_duration = get_video_duration(video_file_path)
+
 
 def show_original():
     player.command('loadfile', original_video_path)
@@ -45,7 +50,7 @@ def cut_video():
             cmd += ['-hwaccel', 'cuda']
         elif vulkan_checkbox_var.get():
             cmd += ['-hwaccel', 'vulkan']
-        cmd += ['-ss', start_time, '-i', input_file, '-to', end_time, '-c', 'copy', '-copyts', output_file]
+        cmd += ['-y','-ss', start_time, '-i', input_file, '-to', end_time, '-c', 'copy', '-copyts', output_file]
         subprocess.run(cmd)
 
         player.command('loadfile', output_file)
