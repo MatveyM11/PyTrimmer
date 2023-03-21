@@ -33,7 +33,9 @@ def show_original():
     player.loop_playlist = 'inf'
 
 def show_output():
-    output_file_path = "output" + os.path.splitext(os.path.basename(video_path_var.get()))[0] + os.path.splitext(video_path_var.get())[1]
+    input_file = video_path_var.get()
+    output_folder = output_folder_var.get()
+    output_file_path = os.path.join(output_folder, "output" + os.path.splitext(os.path.basename(input_file))[0] + os.path.splitext(input_file)[1])
     player.command('loadfile', output_file_path)
     player.loop_playlist = 'inf'
 
@@ -42,24 +44,29 @@ def cut_video():
     start_time = start_var.get()
     end_time = end_var.get()
     input_file = video_path_var.get()
-    output_file = "output" + os.path.splitext(os.path.basename(input_file))[0] + os.path.splitext(input_file)[1]
+    output_folder = output_folder_var.get()
+    output_file = os.path.join(output_folder, "output" + os.path.splitext(os.path.basename(input_file))[0] + os.path.splitext(input_file)[1])
 
     if start_time and end_time:
-        cmd = ['ffmpeg']
+        cmd = ['ffmpeg', '-y']
         if cuda_checkbox_var.get():
             cmd += ['-hwaccel', 'cuda']
         elif vulkan_checkbox_var.get():
             cmd += ['-hwaccel', 'vulkan']
-        cmd += ['-y','-ss', start_time, '-i', input_file, '-to', end_time, '-c', 'copy', '-copyts', output_file]
+        cmd += ['-ss', start_time, '-i', input_file, '-to', end_time, '-c', 'copy', output_file]
         subprocess.run(cmd)
 
         player.command('loadfile', output_file)
         player.loop_playlist = 'inf'
         global cut_output_file_path
         cut_output_file_path = output_file
-        #print(cmd)
+        print("CMD command", cmd)
+        print("Output command", output_folder)
 
-
+def browse_output_folder():
+    output_folder_path = filedialog.askdirectory()
+    if output_folder_path:
+        output_folder_var.set(output_folder_path)
 
 def on_slider_move(event):
     global slider_moving
@@ -78,12 +85,15 @@ def on_slider_move(event):
 
 root = tk.Tk()
 root.title("PyTrimmer")
-root.geometry("500x500")
+root.geometry("610x610")
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 icon_path = os.path.join(script_dir, 'PyTrimmer.png')
 icon = tk.PhotoImage(file=icon_path)
 root.iconphoto(True, icon)
+
+output_folder_var = tk.StringVar()
+output_folder_var.set(os.path.dirname(os.path.realpath(__file__)))
 
 
 sv_ttk.set_theme("light")
@@ -137,6 +147,9 @@ ttk.Button(frame, text="Cut Video", command=cut_video).grid(column=1, row=3, pad
 ttk.Button(frame, text="Show Original", command=show_original).grid(column=2, row=3, pady=20)
 ttk.Button(frame, text="Show Output", command=show_output).grid(column=0, row=3, pady=20)
 
+ttk.Button(frame, text="Output Folder", command=browse_output_folder).grid(column=2, row=1)
+
+
 # Add the video player
 player_container = ttk.Frame(frame)
 player_container.grid(column=0, row=4, columnspan=3, pady=20, sticky=(tk.W, tk.E, tk.N, tk.S))
@@ -178,7 +191,7 @@ def resize_canvas(event):
     #print(" Resize Window width:", end_width)
 
     if(root.winfo_width() == 1):
-        canvas_width = 460
+        canvas_width = 570
 
     # Set the new width and height of the canvas
     canvas.config(width=window_width, height=canvas_height)
@@ -206,7 +219,7 @@ if(root.winfo_width() != 1):
     canvas_width = end_width
     #print(canvas_width)
 else:
-    canvas_width = 710
+    canvas_width = 610
 
 slider1_width = int(root.winfo_width() * 0.01)
 slider2_width = int(canvas_width)
