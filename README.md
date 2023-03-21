@@ -34,3 +34,9 @@ pip install mpv tk sv-ttk
 ```terminal
 sudo pacman -S ffmpeg tk mpv
 ```
+
+1. Make install.sh executable:  
+a) via GUI on right click Properties --> Permissions --> click `is executable`  
+b) via terminal - `cd` into the directory with install.sh --> chmod +x  install.sh
+
+2. Run it on double click or in the terminal.
